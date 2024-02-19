@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Detection Result</title>
+</head>
+<body>
+    <h1>Object Detection Result</h1>
+
+    <!-- Display the detected object image with its boundary -->
+
+    <img src="{{ url_for('static', filename=image_path) }}" alt="Detected Object" width="400" height="300">
+
+
+    <!-- Display the object width and height -->
+    <p>Width: {{ object_width }} mm</p>
+    <p>Height: {{ object_height }} mm</p>
+</body>
+</html>
