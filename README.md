@@ -1,4 +1,4 @@
-This is a project to caliberate a camera and then use the obtained parameters to detect dimensions of a planer object.
+This is a project to calibrate a camera and then use the obtained parameters to detect dimensions of a planer object.
 
 You can use the (code to click images of chessboard pattern.ipynb) to click multiple images from different angles and store them in a repository.
 These images can now be used by the Module 1 Python code.ipynb file to fing the camera parameters
