@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time Object Dimensions</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #videoContainer {
+            display: {% if start %}block{% else %}none{% endif %};
+            margin-top: 20px;
+        }
+        #measurements {
+            display: {% if start %}block{% else %}none{% endif %};
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Video Feed</h1>
+    <h2>Hey, I think you are here to measure dimension of an object, if yes just click below.</h2>
+    <form method="post">
+        <button type="submit" name="action" value="Start">Start Measuring</button>
+    </form>
+    <div id="videoContainer">
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    </div>
+    <div id="measurements">
+        <p id="width">Width: 0 mm</p>
+        <p id="height">Height: 0 mm</p>
+    </div>
+    <script>
+        function fetchMeasurements() {
+            fetch('/measurements')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('width').textContent = `Width: ${data.width.toFixed(2)} mm`;
+                    document.getElementById('height').textContent = `Height: ${data.height.toFixed(2)} mm`;
+                })
+                .catch(console.error);
+        }
+
+        // Convert the Jinja2 template variable to a JavaScript boolean
+        const isMeasuringStarted = {{ start | tojson }};
+
+        if (isMeasuringStarted) {
+            setInterval(fetchMeasurements, 1000); // Fetch measurements every second
+        }
+    </script>
+</body>
+</html>
